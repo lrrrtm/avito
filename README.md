@@ -53,7 +53,7 @@ docker exec avito-app-1 pytest tests/test_e2e.py
 ```
 
 ## Нагрузочное тестирование
-Проведено локальное нагрузочное тестирование скриптом `load_test.py` в течение 60 секунд.
+Проведено локальное нагрузочное тестирование скриптом [load_test.py](https://github.com/lrrrtm/avito/blob/main/load_test.py) в течение 60 секунд.
 
 **Результаты:**
 - **Total Requests:** 299
@@ -70,7 +70,7 @@ docker exec avito-app-1 pytest tests/test_e2e.py
 - Мердж PR (`merge_pr`): 37
 
 ## Линтёр
-В проекте используется [Ruff](https://docs.astral.sh/ruff/) для линтинга и форматирования кода. Конфигурация находится в файле `pyproject.toml`.
+В проекте используется [Ruff](https://docs.astral.sh/ruff/) для линтинга и форматирования кода. Конфигурация находится в файле [pyproject.toml](https://github.com/lrrrtm/avito/blob/main/pyproject.toml).
 
 Для запуска линтёра необходимо установить зависимость и, находясь в директории проекта, вызвать проверку:
 ```bash
