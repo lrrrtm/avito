@@ -2,6 +2,7 @@ import pytest
 import asyncio
 from httpx import AsyncClient, ASGITransport
 from app.main import app
+from app.core.config import settings
 
 
 @pytest.fixture(scope="session")
@@ -14,5 +15,6 @@ def event_loop():
 @pytest.fixture(scope="function")
 async def client():
     transport = ASGITransport(app=app)
-    async with AsyncClient(transport=transport, base_url="http://test") as c:
+    headers = {"Authorization": f"Bearer {settings.API_TOKEN}"}
+    async with AsyncClient(transport=transport, base_url="http://test", headers=headers) as c:
         yield c

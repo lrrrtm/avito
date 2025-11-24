@@ -3,6 +3,7 @@ import httpx
 import uuid
 
 BASE_URL = "http://localhost:8080"
+HEADERS = {"Authorization": "Bearer secret-token"}
 
 
 @pytest.mark.e2e
@@ -32,6 +33,7 @@ def test_e2e_full_flow():
                 {"user_id": u2, "username": "E2E_User2", "is_active": True},
             ],
         },
+        headers=HEADERS,
     )
     assert response.status_code == 201
 
@@ -39,12 +41,13 @@ def test_e2e_full_flow():
     response = httpx.post(
         f"{BASE_URL}/pullRequest/create",
         json={"pull_request_id": pr_id, "pull_request_name": "E2E PR", "author_id": u1},
+        headers=HEADERS,
     )
     assert response.status_code == 201
     data = response.json()
     assert u2 in data["pr"]["assigned_reviewers"]
 
     # 3. Merge PR
-    response = httpx.post(f"{BASE_URL}/pullRequest/merge", json={"pull_request_id": pr_id})
+    response = httpx.post(f"{BASE_URL}/pullRequest/merge", json={"pull_request_id": pr_id}, headers=HEADERS)
     assert response.status_code == 200
     assert response.json()["pr"]["status"] == "MERGED"
